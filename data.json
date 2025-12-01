@@ -1,0 +1,29 @@
+[
+    {
+        "system": "Thermal",
+        "name": "Sensor_Temp_A",
+        "limits": {
+            "type": "Temperature",
+            "min": -50,
+            "max": 120
+        }
+    },
+    {
+        "system": "Power",
+        "name": "Battery_Pack_1",
+        "limits": {
+            "type": "Voltage",
+            "min": 24,
+            "max": 32
+        }
+    },
+    {
+        "system": "Thermal",
+        "name": "Heater_Main",
+        "limits": {
+            "type": "Current",
+            "min": 0,
+            "max": 10
+        }
+    }
+]
