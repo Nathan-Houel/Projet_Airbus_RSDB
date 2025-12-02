@@ -3,7 +3,7 @@ import sqlite3
 import logging
 import sys
 
-data = 'massive_date.json'
+data = 'massive_data.json'
 
 # Logging initialization
 logging.basicConfig(filename='activity.log', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -37,5 +37,7 @@ for elt in data_brute:
     cur.execute("INSERT OR IGNORE INTO Limits (equipment_id, measure_type, min_value, max_value) VALUES (?, ?, ?, ?)", 
                 (equipment_id, elt["limits"]['type'], elt["limits"]['min'], elt["limits"]['max']))
 
+
+# Sending and closing the database
 conn.commit()
 conn.close()
