@@ -1,7 +1,7 @@
 # 🛰️ Avionics SRDB : Data Architecture & Visualization
 
 ## 📋 About the Project
-This project simulates a **Satellite Reference Database (SRDB)** workflow, a critical component in aerospace engineering. It demonstrates a full-stack data engineering pipeline: from raw data generation to end-user visualization.
+This project simulates a **Satellite Reference Database (SRDB)** workflow, a critical component in aerospace engineering. It demonstrates a full-stack data engineering pipeline : from raw data generation to end-user visualization.
 
 **Goal :** Ensure data consistency and accessibility for avionics subsystems (Thermal, Power, Propulsion, etc.).
 
