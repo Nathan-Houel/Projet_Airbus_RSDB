@@ -18,3 +18,12 @@ CREATE TABLE Limits (
     min_value REAL,
     max_value REAL
 );
+
+
+CREATE TABLE History (
+    ID INTEGER PRIMARY KEY,
+    equipment_id INTEGER REFERENCES Equipments(ID),
+    old_value REAL,
+    new_value REAL,
+    change_date TEXT
+);

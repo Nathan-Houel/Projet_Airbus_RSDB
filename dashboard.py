@@ -39,7 +39,6 @@ def load_data(sys_name):
 
 
 # Sidebar configuration
-
 selected_system = st.sidebar.selectbox("Choose a system", systems)
 
 st.sidebar.markdown("### Display Options")
