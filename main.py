@@ -14,7 +14,7 @@ cur = conn.cursor()
 
 # Reading and stocking raw data
 try : 
-    with open('data.json', 'r') as f:
+    with open('massive_data.json', 'r') as f:
         data_brute = json.load(f)
 except FileNotFoundError:
     logging.error("Critical error : data.json not found")
