@@ -7,21 +7,19 @@ from update_limits import update_spec
 
 # ---- Initialize the database ----
 
-# Check if the DB exists
-if os.path.exists('avionics.db'):
-    os.remove('avionics.db')
-    print("Older database delete !")
+# Create a new DB if not existing
+if not os.path.exists('avionics.db'):
+    # Connecting to the new database
+    conn = sqlite3.connect('avionics.db')
 
-# Connecting to the new database
-conn = sqlite3.connect('avionics.db')
+    # Reading the SQL architecture
+    with open('schema.sql','r') as f:
+        sql_script = f.read()
 
-# Reading the SQL architecture
-with open('schema.sql','r') as f:
-    sql_script = f.read()
-
-# Create the tables in the database and close it
-conn.executescript(sql_script)
-conn.close()
+    # Create the tables in the database and close it
+    conn.executescript(sql_script)
+    conn.close()
+    print("New DataBase create !")
 
 
 # ---- Data Generation ----
