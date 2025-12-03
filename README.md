@@ -1,62 +1,71 @@
 # 🛰️ Avionics SRDB : Data Architecture & Visualization
 
 ## 📋 About the Project
-This project simulates a **Satellite Reference Database (SRDB)** workflow, a critical component in aerospace engineering. It demonstrates a full-stack data engineering pipeline : from raw data generation to end-user visualization.
+This project simulates a **Satellite Reference Database (SRDB)** workflow, a critical component in aerospace engineering. It demonstrates a full-stack data engineering pipeline : from raw data generation to end-user visualization, including a robust audit system.
 
-**Goal :** Ensure data consistency and accessibility for avionics subsystems (Thermal, Power, Propulsion, etc.).
+**Goal :** Ensure data consistency, accessibility, and traceability for avionics subsystems (Thermal, Power, Propulsion, etc.).
+
+## 🌟 Key Features
+* **ETL Pipeline :** Automates the ingestion of raw JSON data into a structured SQL architecture.
+* **Data Consistency :** Automated unit testing (`pytest`) guarantees physical constraints (e.g., Min < Max).
+* **Interactive Dashboard :** A Streamlit web app for engineers to filter and analyze equipment.
+* **Time Machine (Audit Trail) :** A specialized `History` table tracks every modification (Old Value vs New Value, Timestamp) to ensure full traceability of specifications.
+* **Full Automation :** A master script (`run_all.py`) orchestrates the entire lifecycle, from database cleanup to dashboard launch.
 
 ## 🏗️ Architecture
-The project follows a standard **ETL (Extract, Transform, Load)** pattern :
+The project follows a standard **ETL (Extract, Transform, Load)** pattern:
 
 1.  **Data Generation :** Creation of mock satellite equipment data (`generator.py`).
-2.  **ETL Pipeline :** Parsing JSON, validating integrity, and loading into a relational database (`main.py` -> SQLite).
-3.  **Quality Assurance :** Automated unit testing to ensure physical constraints (e.g., Min < Max) (`test_consistency.py`).
-4.  **Visualization :** An interactive dashboard for engineers to filter and analyze equipment limits (`dashboard.py`).
+2.  **Ingestion :** Parsing and loading data into SQLite (`main.py`).
+3.  **Validation :** Quality gates using automated tests (`test_consistency.py`).
+4.  **Management :** Admin tools to update limits and log changes (`update_limits.py`).
+5.  **Visualization :** User interface for data exploration (`dashboard.py`).
 
 ## 🛠️ Tech Stack
-* **Language :** Python 3.11.6
+* **Language :** Python 3.13.9
 * **Database :** SQLite
 * **Data Analysis :** Pandas
 * **Web App :** Streamlit
 * **Testing :** Pytest
+* **Orchestration :** Python `subprocess`
 
 ## 🚀 How to Run
 
 ### 1. Installation
-Clone the repository and install the dependencies :
+Clone the repository and install dependencies :
 ```bash
 git clone [https://github.com/TonPseudo/Projet_Airbus_SRDB.git](https://github.com/TonPseudo/Projet_Airbus_SRDB.git)
-pip install pandas streamlit pytest
+pip install -r requirements.txt
 ```
 
-### 2. Generate & Load Data
-Initialize the database and generate fresh mock data :
+### 2. Launch (Automated Mode) ⚡
+The easiest way to run the project. This script cleans the environment, rebuilds the database, runs tests, and launches the dashboard.
 ```bash
-python generator.py  # Creates massive_data.json
-python main.py       # Loads data into avionics.db
+python run_all.py
 ```
 
-### 3. Run Tests
-Verify data consistency (physical limits check) :
+### 3. Manual Mode (Dev)
+If you prefer running steps individually :
 ```bash
-pytest
+python generator.py       # Generate mock data
+python main.py            # Load data into DB
+pytest                    # Run quality checks
+streamlit run dashboard.py # Start the UI
 ```
 
-### 4. Launch Dashboard
-Start the interactive web interface :
-```bash
-streamlit run dashboard.py
-```
+### 📂 Project Structure
+* `run_all.py` : Master script that orchestrates the entire workflow.
 
-## 📂 Project Structure
-* **dashboard.py** : Streamlit application source code.
+* `dashboard.py` : Streamlit application source code.
 
-* **main.py** : ETL script for database ingestion.
+* `main.py` : ETL script for database ingestion.
 
-* **generator.py** : Script to generate random mock data.
+* `generator.py` : Script to generate random mock data.
 
-* **test_consistency.py** : Unit tests for data validation.
+* `update_limits.py` : Module handling data updates and history logging.
 
-* **schema.sql** : SQL script defining the database architecture.
+* `test_consistency.py` : Unit tests for data validation.
 
-* **avionics.db** : The SQLite database file.
+* `schema.sql` : SQL script defining the DB architecture (Equipments, Subsystems, Limits, History).
+
+* `requirements.txt` : List of external Python libraries.
